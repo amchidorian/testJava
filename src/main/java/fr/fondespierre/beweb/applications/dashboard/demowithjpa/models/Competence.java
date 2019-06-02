@@ -3,21 +3,29 @@ package fr.fondespierre.beweb.applications.dashboard.demowithjpa.models;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.interfaces.ModelBasicMethod;
 import org.json.JSONObject;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
+@Table(name="competence")
 public class Competence implements ModelBasicMethod {
     @Id
     private Long id;
 
     private String title;
 
-    private ArrayList<String> list;
+    @JoinTable(
+            name="practice",
+            joinColumns = @JoinColumn( name="id"),
+            inverseJoinColumns = @JoinColumn( name="PART_ID")
+    )
+    private String name;
 
-    public Competence(Integer id, String title, ArrayList<String> list) {
+    public Competence(Integer id, String title, String name) {
         this.id = (long) id;
         this.title = title;
-        this.list = list;
+        this.name = name;
     }
 
     public Long getId() {
@@ -36,26 +44,18 @@ public class Competence implements ModelBasicMethod {
         this.title = title;
     }
 
-    public ArrayList<String> getList() {
-        return list;
+    public String getName() {
+        return name;
     }
 
-    public void setList(ArrayList<String> list) {
-        this.list = list;
-    }
-    
-    public void addToList(String l){
-        this.list.add(l);
-    }
-
-    public void removeFromList(String l){
-        this.list.remove(l);
+    public void setName(String name) {
+        this.name = name;
     }
 
     public JSONObject toJson() {
         JSONObject fullCalendar = new JSONObject();
         fullCalendar.put("id", this.getId());
-        fullCalendar.put("list", this.getList());
+        fullCalendar.put("name", this.getName());
         fullCalendar.put("title", this.getTitle());
         return fullCalendar;
     }

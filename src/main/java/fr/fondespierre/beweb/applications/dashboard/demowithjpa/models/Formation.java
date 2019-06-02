@@ -1,12 +1,16 @@
 package fr.fondespierre.beweb.applications.dashboard.demowithjpa.models;
 
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.interfaces.ModelBasicMethod;
+import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Selection;
 import org.json.JSONObject;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
+@Entity
+@Table(name="formation")
 public class Formation implements ModelBasicMethod {
 
 
@@ -17,11 +21,24 @@ public class Formation implements ModelBasicMethod {
 
     private Date start, end;
 
-    private ArrayList<Competence> competences;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "requirement",
+            joinColumns = { @JoinColumn(name = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "formation") }
+    )
+    private Set<Competence> competences;
 
-    private ArrayList<Selection> selections;
 
-    public Formation(Integer id, String title, String level, String city, String place, String presentation, Date start, Date end, ArrayList<Competence> competences, ArrayList<Selection> selections) {
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "practice",
+            joinColumns = { @JoinColumn(name = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "formation") }
+    )
+    private Set<Selection> selections;
+
+    public Formation(Integer id, String title, String level, String city, String place, String presentation, Date start, Date end, Set<Competence> competences, Set<Selection> selections) {
         this.id = (long)id;
         this.title = title;
         this.level = level;
@@ -102,11 +119,11 @@ public class Formation implements ModelBasicMethod {
         this.end = end;
     }
 
-    public ArrayList<Competence> getCompetences() {
+    public Set<Competence> getCompetences() {
         return competences;
     }
 
-    public void setCompetences(ArrayList<Competence> competences) {
+    public void setCompetences(Set<Competence> competences) {
         this.competences = competences;
     }
 
@@ -120,11 +137,11 @@ public class Formation implements ModelBasicMethod {
         return this;
     }
 
-    public ArrayList<Selection> getSelections() {
+    public Set<Selection> getSelections() {
         return selections;
     }
 
-    public void setSelections(ArrayList<Selection> selections) {
+    public void setSelections(Set<Selection> selections) {
         this.selections = selections;
     }
 

@@ -1,21 +1,15 @@
 package fr.fondespierre.beweb.applications.dashboard.demowithjpa.controllers;
 
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.Competence;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.Formation;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.FullCalendar;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.Selection;
-import org.json.JSONObject;
+import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.*;
+import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Selection;
+import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Step;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 @RestController
 @RequestMapping("/formations")
@@ -23,51 +17,28 @@ public class FormationController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getCurrent() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 2019);
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        Date date = cal.getTime();
-        Calendar cal1 = Calendar.getInstance();
-        cal1.set(Calendar.YEAR, 2019);
-        cal1.set(Calendar.MONTH, Calendar.JANUARY);
-        cal1.set(Calendar.DAY_OF_MONTH, 1);
-        Date date1 = cal.getTime();
-        Competence c = new Competence(1, "Outils & environnement open source", new ArrayList() {{
-            add("Ubuntu");
-            add("Visual Studio Code");
-        }});
-        Competence c1 = new Competence(2, "Gérer un projet web", new ArrayList() {{
-            add("Méthodes agiles");
-            add("Gestion de planning (Trello)");
-            add("Carnet de bord (Framapad)");
-            add("Versionning");
-        }});
-        HashMap h2 = new HashMap<String, String>() {{
-            put("Parkout", "test");
-        }};
-        HashMap h1 = new HashMap<String, String>() {{
-            put("Parkout", "test");
-        }};
-        ArrayList<HashMap<String, String>> hh = new ArrayList<HashMap<String, String>>(){{add(h2);}};
-        ArrayList<HashMap<String, String>> hh1 = new ArrayList<HashMap<String, String>>(){{add(h1);}};
-        Selection s = new Selection("Codecademy", "N’hésitez pas à être curieux et passer un maximum de badges ! C’est très important", hh , "Codecademy");
-        Selection s1 = new Selection("Pornhub", "N’hésitez pas à être curieux et laisser un maximum de vue ! C’est très important", hh1, "+ de 23 cm");
-
-        Formation f = new Formation(1, "Beweb", "niveau 3", "Lulu", "Rue des mouettes", "C'est la ", date, date1, new ArrayList() {{
-            add(c);
-            add(c1);
-        }}, new ArrayList() {{
-            add(s);
-            add(s1);
-        }});
-        Formation f1 = new Formation(1, "Beweb", "niveau 3", "lolo", "Rue des mouettes", "C'est la ", date, date1, new ArrayList() {{
-            add(c);
-            add(c1);
-        }}, new ArrayList() {{
-            add(s);
-            add(s1);
-        }});
+        Date date = Tools.getDate(1,2,2019);
+        Date date1 = Tools.getDate(1,2,2019);
+//        new ArrayList() {{
+//            add("Ubuntu");
+//            add("Visual Studio Code");
+//        }});
+        Step step = new Step(1, "http://", "Codecademy");
+        Step step1 = new Step(2, "http://", "Linkedin");
+        Competence c = new Competence(1, "Outils & environnement open source", "Ubuntu");
+        Competence c1 = new Competence(1, "Outils & environnement open source", "Git");
+        Competence c2 = new Competence(1, "Outils & environnement open source", "IntelliJ");
+        Competence c4 = new Competence(1, "Gérer un projet web", "Carnet de bord (Framapad)");
+        Competence c3 = new Competence(1, "Gérer un projet web", "Versionning");
+        Competence c5 = new Competence(1, "Gérer un projet web", "Méthodes agiles");
+        Selection s = new Selection(1, "Codecademy", "N’hésitez pas à être curieux et passer un maximum de badges ! C’est très important",
+                new HashSet<Step>(Arrays.asList(step, step1)), "Codecademy");
+        Selection s1 = new Selection(2, "Codecademy", "N’hésitez pas à être curieux et passer un maximum de badges ! C’est très important",
+                new HashSet<Step>(Arrays.asList(step, step1)), "Codecademy");
+        Formation f = new Formation(1, "Beweb", "niveau 3", "Lulu", "Rue des mouettes", "C'est la ",
+                date, date1, new HashSet<Competence>(Arrays.asList(c ,c1 ,c2 ,c3, c4)),  new HashSet<Selection>(Arrays.asList(s, s1)));
+        Formation f1 = new Formation(1, "Test", "niveau 3", "Lunel", "Rue des pisselit", "C'est la ",
+                date, date1,  new HashSet<Competence>(Arrays.asList(c ,c5 ,c2 ,c3, c4)),  new HashSet<Selection>(Arrays.asList(s, s1)));
 
         System.out.println(f);
 
