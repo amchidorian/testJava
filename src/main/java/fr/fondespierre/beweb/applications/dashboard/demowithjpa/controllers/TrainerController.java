@@ -24,7 +24,7 @@ public class TrainerController {
     @GetMapping("/new")
     public ResponseEntity<?> getCurrent() {
         FullCalendar event = new FullCalendar( 1, "2019-05-30", "2019-05-30", "blue");
-        HttpHeaders h = new HttpHeader();
+        HttpHeaders h = new HttpHeaders();
         h.add("Access-Control-Allow-Origin", "*");
         h.add("Content-Type", "application/json");
         System.out.println(event);

@@ -17,8 +17,8 @@ public class FormationController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getCurrent() {
-        Date date = Tools.getDate(1,2,2019);
-        Date date1 = Tools.getDate(1,2,2019);
+        Date date = Tools.getDate(1, 2, 2019);
+        Date date1 = Tools.getDate(1, 2, 2019);
 //        new ArrayList() {{
 //            add("Ubuntu");
 //            add("Visual Studio Code");
@@ -36,13 +36,13 @@ public class FormationController {
         Selection s1 = new Selection(2, "Codecademy", "N’hésitez pas à être curieux et passer un maximum de badges ! C’est très important",
                 new HashSet<Step>(Arrays.asList(step, step1)), "Codecademy");
         Formation f = new Formation(1, "Beweb", "niveau 3", "Lulu", "Rue des mouettes", "C'est la ",
-                date, date1, new HashSet<Competence>(Arrays.asList(c ,c1 ,c2 ,c3, c4)),  new HashSet<Selection>(Arrays.asList(s, s1)));
+                date, date1, new HashSet<Competence>(Arrays.asList(c, c1, c2, c3, c4)), new HashSet<Selection>(Arrays.asList(s, s1)));
         Formation f1 = new Formation(1, "Test", "niveau 3", "Lunel", "Rue des pisselit", "C'est la ",
-                date, date1,  new HashSet<Competence>(Arrays.asList(c ,c5 ,c2 ,c3, c4)),  new HashSet<Selection>(Arrays.asList(s, s1)));
+                date, date1, new HashSet<Competence>(Arrays.asList(c, c5, c2, c3, c4)), new HashSet<Selection>(Arrays.asList(s, s1)));
 
         System.out.println(f);
 
-        HttpHeaders h = new HttpHeader();
+        HttpHeaders h = new HttpHeaders();
         h.add("Access-Control-Allow-Origin", "*");
         h.add("Content-Type", "application/json");
         ArrayList<Formation> fs = new ArrayList<>();

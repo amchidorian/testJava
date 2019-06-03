@@ -23,7 +23,7 @@ public class Formation implements ModelBasicMethod {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "requirement",
+            name = "practice",
             joinColumns = { @JoinColumn(name = "id") },
             inverseJoinColumns = { @JoinColumn(name = "formation") }
     )
@@ -32,8 +32,8 @@ public class Formation implements ModelBasicMethod {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "practice",
-            joinColumns = { @JoinColumn(name = "id") },
+            name = "requirement",
+            joinColumns = { @JoinColumn(name = "Selection") },
             inverseJoinColumns = { @JoinColumn(name = "formation") }
     )
     private Set<Selection> selections;

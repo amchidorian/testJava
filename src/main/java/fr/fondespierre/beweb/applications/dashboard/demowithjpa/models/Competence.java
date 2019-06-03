@@ -5,27 +5,28 @@ import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name="competence")
+@Table(name = "competence")
 public class Competence implements ModelBasicMethod {
     @Id
     private Long id;
 
     private String title;
 
-    @JoinTable(
-            name="practice",
-            joinColumns = @JoinColumn( name="id"),
-            inverseJoinColumns = @JoinColumn( name="PART_ID")
-    )
     private String name;
+
+    @ManyToMany(mappedBy = "practice")
+    private Set<Formation> formations = new HashSet<>();
 
     public Competence(Integer id, String title, String name) {
         this.id = (long) id;
         this.title = title;
         this.name = name;
+        this.formations = formations;
     }
 
     public Long getId() {
@@ -50,6 +51,14 @@ public class Competence implements ModelBasicMethod {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Formation> getFormations() {
+        return formations;
+    }
+
+    public void setFormations(Set<Formation> formations) {
+        this.formations = formations;
     }
 
     public JSONObject toJson() {

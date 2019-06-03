@@ -6,23 +6,23 @@ import java.util.List;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.Formation;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Formulaire;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/formations")
-public class InscriptionController {
+class InscriptionController {
 
-    @PostMapping("/formulaire")
-    void newEmployee(@RequestBody ArrayList<Formation> f) {
-        System.out.println("Formation");
-        System.out.println(f.get(0));
+    @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE,method = RequestMethod.POST,path = "/inscription",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> inscription(@RequestBody Formulaire form){
+        HttpHeaders options = new HttpHeaders();
+        options.add("Access-Control-Allow-Headers", "*");
+        System.out.println("formulaire");
+        System.out.println(form.getCandidature().getAnglais());
+        System.out.println(form.getUser().getDateDeNaissance());
+        return ResponseEntity.ok().headers(options).body(form);
     }
 }

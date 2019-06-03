@@ -12,27 +12,27 @@ public class Formulaire {
 
     private User user;
 
-    private Long id;
+    private Long idFormation;
 
     public Formulaire() {
     }
 
     public Formulaire(Integer id, Candidature candidature, User user) {
-        this.id = (long)id;
+        this.idFormation = (long)id;
         this.candidature = candidature;
         this.user = user;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdFormation() {
+        return idFormation;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFormation(Long idFormation) {
+        this.idFormation = idFormation;
     }
 
     public Candidature getCandidature() {
-        return candidature;
+        return this.candidature;
     }
 
     public void setCandidature(Candidature candidature) {
@@ -40,7 +40,7 @@ public class Formulaire {
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 
     public void setUser(User user) {
