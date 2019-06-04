@@ -19,14 +19,14 @@ public class Competence implements ModelBasicMethod {
 
     private String name;
 
-    @ManyToMany(mappedBy = "practice")
-    private Set<Formation> formations = new HashSet<>();
+//    @ManyToMany(mappedBy = "practice")
+//    private Set<Formation> formations = new HashSet<>();
 
     public Competence(Integer id, String title, String name) {
         this.id = (long) id;
         this.title = title;
         this.name = name;
-        this.formations = formations;
+//        this.formations = formations;
     }
 
     public Long getId() {
@@ -53,13 +53,13 @@ public class Competence implements ModelBasicMethod {
         this.name = name;
     }
 
-    public Set<Formation> getFormations() {
-        return formations;
-    }
+//    public Set<Formation> getFormations() {
+//        return formations;
+//    }
 
-    public void setFormations(Set<Formation> formations) {
-        this.formations = formations;
-    }
+//    public void setFormations(Set<Formation> formations) {
+//        this.formations = formations;
+//    }
 
     public JSONObject toJson() {
         JSONObject fullCalendar = new JSONObject();

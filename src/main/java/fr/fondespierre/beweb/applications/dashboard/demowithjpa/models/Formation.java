@@ -21,23 +21,6 @@ public class Formation implements ModelBasicMethod {
 
     private Date start, end;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "practice",
-            joinColumns = { @JoinColumn(name = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "formation") }
-    )
-    private Set<Competence> competences;
-
-
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(
-            name = "requirement",
-            joinColumns = { @JoinColumn(name = "Selection") },
-            inverseJoinColumns = { @JoinColumn(name = "formation") }
-    )
-    private Set<Selection> selections;
-
     public Formation(Integer id, String title, String level, String city, String place, String presentation, Date start, Date end, Set<Competence> competences, Set<Selection> selections) {
         this.id = (long)id;
         this.title = title;
@@ -47,8 +30,6 @@ public class Formation implements ModelBasicMethod {
         this.presentation = presentation;
         this.start = start;
         this.end = end;
-        this.competences = competences;
-        this.selections = selections;
     }
 
     public String toString() {
@@ -119,42 +100,6 @@ public class Formation implements ModelBasicMethod {
         this.end = end;
     }
 
-    public Set<Competence> getCompetences() {
-        return competences;
-    }
-
-    public void setCompetences(Set<Competence> competences) {
-        this.competences = competences;
-    }
-
-    public Formation addToCompetence(Competence c) {
-        this.competences.add(c);
-        return this;
-    }
-
-    public Formation removeFromCompetence(Competence c) {
-        this.competences.remove(c);
-        return this;
-    }
-
-    public Set<Selection> getSelections() {
-        return selections;
-    }
-
-    public void setSelections(Set<Selection> selections) {
-        this.selections = selections;
-    }
-
-    public Formation addToSelections(Selection s) {
-        this.selections.add(s);
-        return this;
-    }
-
-    public Formation removeFromSelections(Selection s) {
-        this.selections.remove(s);
-        return this;
-    }
-
     public JSONObject toJson() {
         JSONObject competence = new JSONObject();
         competence.put("id", this.getId());
@@ -164,8 +109,6 @@ public class Formation implements ModelBasicMethod {
         competence.put("level", this.getLevel());
         competence.put("city", this.getCity());
         competence.put("presentation", this.getPresentation());
-        competence.put("competences", this.getCompetences());
-        competence.put("selections", this.getSelections());
         return competence;
     }
 }
