@@ -1,11 +1,11 @@
 package fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools;
 
+
+import java.io.FileNotFoundException;
 import java.util.Properties;
 
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -22,18 +22,21 @@ public class Email {
     private Session session;
 
 
-    public Email() {
-        this.props.put("mail.smtp.host", "ssl0.ovh.net");
-        this.props.put("mail.smtp.port", "587");
-        this.props.put("mail.smtp.auth", "true");
-        this.props.put("mail.smtp.starttls.enable", "true");
-        // ajout de l'authentification pour la session
-        this.session = Session.getInstance(this.props, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("inscriptions@fabrique-beweb.com", "kPGsXcij2845sQx");
-            }
-        });
+    public Email() throws FileNotFoundException {
+        Tools t = new Tools();
+        t.getConfig();
+//        JSONObject config = parser.
+//        this.props.put("mail.smtp.host", "ssl0.ovh.net");
+//        this.props.put("mail.smtp.port", "587");
+//        this.props.put("mail.smtp.auth", "true");
+//        this.props.put("mail.smtp.starttls.enable", "true");
+//        // ajout de l'authentification pour la session
+//        this.session = Session.getInstance(this.props, new Authenticator() {
+//            @Override
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication("inscriptions@fabrique-beweb.com", "kPGsXcij2845sQx");
+//            }
+//        });
     }
 
     /**
@@ -46,9 +49,7 @@ public class Email {
         // objet Mail
         Message m = new MimeMessage(this.session);
         // corps du message ici en html
-        String mp = "<html><head></head><body><div style=\"width: 100%; height: 100%; background-color: red\">\n" +
-                "    <h1 style=\"width: 100%; height: 100%; text-align: center\">BONJOUR</h1>\n" +
-                "</div>\n</body></html>";
+        String mp = "<html><head></head><body></body></html>";
 
         // Le corps du mail est decoupé en plusieurs parties (MultiPart)
         MimeMultipart mm = new MimeMultipart();

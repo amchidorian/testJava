@@ -1,0 +1,14 @@
+{
+  "mail" : {
+    "stmp": {
+      "host": "ssl0.ovh.net",
+      "port": "587",
+      "auth": "true",
+      "starttls.enable" : "true"
+    },
+    "credentials": {
+      "username": "inscriptions@fabrique-beweb.com",
+      "password": "kPGsXcij2845sQx"
+    }
+  }
+}

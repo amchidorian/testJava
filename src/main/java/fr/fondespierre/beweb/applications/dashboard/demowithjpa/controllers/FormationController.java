@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 @RestController
@@ -20,7 +21,7 @@ import java.util.*;
 public class FormationController {
 
     @GetMapping("/get")
-    public ResponseEntity<?> getCurrent() {
+    public void getCurrent() {
         HttpHeaders h = new HttpHeaders();
         h.add("Access-Control-Allow-Origin", "*");
         h.add("Content-Type", "application/json");
@@ -28,13 +29,18 @@ public class FormationController {
         js.put("test", "test");
         System.out.println(js);
         try {
-            (new Email()).sendTo(new InternetAddress("loic.derrieux@gmail.com"), "coucou");
-            System.out.printf("suceed");
-            return ResponseEntity.status(400).headers(h).body(js);
-        } catch (MessagingException ex) {
-            System.out.printf("failure");
-            return ResponseEntity.status(500).headers(h).body(ex.getMessage());
+            Email e = new Email();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
         }
+//        try {
+//            (new Email()).sendTo(new InternetAddress("loic.derrieux@gmail.com"), "coucou");
+//            System.out.printf("suceed");
+//            return ResponseEntity.status(400).headers(h).body(js);
+//        } catch (MessagingException ex) {
+//            System.out.printf("failure");
+//            return ResponseEntity.status(500).headers(h).body(ex.getMessage());
+//        }
     }
 }
 //    Date date = Tools.getDate(1, 2, 2019);
