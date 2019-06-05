@@ -4,10 +4,7 @@ package fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools;
 import java.io.FileNotFoundException;
 import java.util.Properties;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -25,18 +22,18 @@ public class Email {
     public Email() throws FileNotFoundException {
         Tools t = new Tools();
         t.getConfig();
-//        JSONObject config = parser.
-//        this.props.put("mail.smtp.host", "ssl0.ovh.net");
-//        this.props.put("mail.smtp.port", "587");
-//        this.props.put("mail.smtp.auth", "true");
-//        this.props.put("mail.smtp.starttls.enable", "true");
-//        // ajout de l'authentification pour la session
-//        this.session = Session.getInstance(this.props, new Authenticator() {
-//            @Override
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication("inscriptions@fabrique-beweb.com", "kPGsXcij2845sQx");
-//            }
-//        });
+        JSONObject config = parser.
+        this.props.put("mail.smtp.host", "ssl0.ovh.net");
+        this.props.put("mail.smtp.port", "587");
+        this.props.put("mail.smtp.auth", "true");
+        this.props.put("mail.smtp.starttls.enable", "true");
+        // ajout de l'authentification pour la session
+        this.session = Session.getInstance(this.props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("inscriptions@fabrique-beweb.com", "kPGsXcij2845sQx");
+            }
+        });
     }
 
     /**

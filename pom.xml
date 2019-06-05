@@ -54,10 +54,7 @@
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
         </dependency>
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -66,7 +63,6 @@
             </plugin>
         </plugins>
     </build>
-
     <repositories>
         <repository>
             <id>spring-snapshots</id>
