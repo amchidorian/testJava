@@ -4,6 +4,7 @@ import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.*;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Selection;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Step;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools.Email;
+import fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools.Tools;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools.config.MailConfig;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
@@ -27,17 +28,16 @@ public class FormationController {
         h.add("Access-Control-Allow-Origin", "*");
         h.add("Content-Type", "application/json");
         JSONObject js = new JSONObject();
-//        js.put("test", "test");
-//        System.out.println(js);
-        MailConfig mc = new MailConfig();
-//        try {
-//            (new Email()).sendTo(new InternetAddress("loic.derrieux@gmail.com"), "coucou");
-//            System.out.printf("suceed");
-//            return ResponseEntity.status(400).headers(h).body(js);
-//        } catch (MessagingException ex) {
-//            System.out.printf("failure");
-//            return ResponseEntity.status(500).headers(h).body(ex.getMessage());
-//        }
+        User u = new User();
+        u.setEmail("loic.derrieux@gmail.com");
+        ArrayList<User> users = new ArrayList<User>(){{add(u);}};
+        try {
+            Tools.getToolsInstance();
+            Tools.sendEmail(users, "bonjour", "bonjour");
+            System.out.println("is ok");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }
 //    Date date = Tools.getDate(1, 2, 2019);

@@ -41,13 +41,17 @@ final public class MailConfig extends Config implements ConfigClassInterface {
         this.stmp = new STMPConfig((JSONObject) config.get("stmp"));
         this.cred = new CredentialsConfig((JSONObject) config.get("credentials"));
     }
+
+    public String getSender(){
+        return this.cred.getUsername();
+    }
 }
 
 final class STMPConfig implements ConfigClassInterface {
 
     private String host, port, auth, starttls;
 
-    public STMPConfig() {
+    STMPConfig() {
     }
 
     STMPConfig(JSONObject config) throws NoSuchFieldException, IllegalAccessException {
@@ -64,7 +68,7 @@ final class STMPConfig implements ConfigClassInterface {
         }
     }
 
-    protected Properties getProperties() {
+    Properties getProperties() {
         Properties p = new Properties();
         p.put("mail.smtp.host", this.host);
         p.put("mail.smtp.port", this.port);
@@ -103,5 +107,9 @@ final class CredentialsConfig implements ConfigClassInterface {
                 return pwAuth;
             }
         };
+    }
+
+    String getUsername(){
+        return this.username;
     }
 }
