@@ -1,20 +1,12 @@
 package fr.fondespierre.beweb.applications.dashboard.demowithjpa.controllers;
 
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.*;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Selection;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.website.Step;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools.Email;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools.Tools;
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools.config.MailConfig;
 import org.json.JSONObject;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
 import java.io.FileNotFoundException;
 import java.util.*;
 
@@ -31,13 +23,7 @@ public class FormationController {
         User u = new User();
         u.setEmail("loic.derrieux@gmail.com");
         ArrayList<User> users = new ArrayList<User>(){{add(u);}};
-        try {
-            Tools.getToolsInstance();
-            Tools.sendEmail(users, "bonjour", "bonjour");
-            System.out.println("is ok");
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+
     }
 }
 //    Date date = Tools.getDate(1, 2, 2019);

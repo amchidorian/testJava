@@ -1,27 +1,20 @@
 package fr.fondespierre.beweb.applications.dashboard.demowithjpa.tools;
 
-import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.Candidature;
 import fr.fondespierre.beweb.applications.dashboard.demowithjpa.models.User;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.mail.MessagingException;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Tools {
 
-    private static Email e;
+    private static EmailSender e;
 
     static {
         try {
-            e = new Email();
+            e = new EmailSender();
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         } catch (NoSuchFieldException e1) {

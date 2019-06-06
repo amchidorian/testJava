@@ -16,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 
-public class Email {
+public class EmailSender {
 
     private MimeMessage mm;
 
@@ -26,7 +26,7 @@ public class Email {
 
     private MimeMultipart mmp  = new MimeMultipart();
 
-    public Email() throws FileNotFoundException, NoSuchFieldException, IllegalAccessException, MessagingException {
+    public EmailSender() throws FileNotFoundException, NoSuchFieldException, IllegalAccessException, MessagingException {
         mm = new MimeMessage(this.mc.getSession());
         mmp.addBodyPart(mb);
     }
